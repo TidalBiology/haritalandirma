@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Data</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Entered Data</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>X</th>
+                    <th>Y</th>
+                    <th>Radioactivity</th>
+                    <th>Pollution</th>
+                    <th>pH</th>
+                    <th>General Pollution</th>
+                    <th>Actions</th>  <!-- Silme işlemi için yeni sütun -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data.itertuples() %}
+                <tr>
+                    <td>{{ row.Name }}</td>
+                    <td>{{ row.X }}</td>
+                    <td>{{ row.Y }}</td>
+                    <td>{{ row.Radioactivity }}</td>
+                    <td>{{ row.Pollution }}</td>
+                    <td>{{ row.pH }}</td>
+                    <td>{{ row._6 }}</td>  <!-- General Pollution -->
+                    <td>
+                        <form action="/delete/{{ row.Index }}" method="POST">
+                            <button type="submit" class="delete-btn">✖</button>  <!-- Silme butonu -->
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="/" class="btn">Go Back</a>
+    </div>
+</body>
+</html>
